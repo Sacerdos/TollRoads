@@ -3,11 +3,17 @@ package ru.indychkov.tollroads.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
 
-@Entity(tableName = "price", foreignKeys = @ForeignKey(entity = TollRoad.class, parentColumns = "id", childColumns = "road_id", onDelete = CASCADE))
+@Entity(tableName = "price", foreignKeys =
+@ForeignKey(entity = TollRoad.class,
+        parentColumns = "id",
+        childColumns = "road_id",
+        onDelete = CASCADE),
+        indices = {@Index(value = "id", unique = true)})
 public class TollRoadPrice {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

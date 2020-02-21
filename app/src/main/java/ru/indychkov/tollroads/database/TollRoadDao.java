@@ -1,6 +1,7 @@
 package ru.indychkov.tollroads.database;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -11,8 +12,11 @@ import java.util.List;
 import ru.indychkov.tollroads.model.TollRoad;
 import ru.indychkov.tollroads.model.TollRoadPrice;
 
+import static androidx.room.OnConflictStrategy.REPLACE;
+
+@Dao
 public interface TollRoadDao {
-    @Insert
+    @Insert(onConflict = REPLACE)
     void addTollRoad(TollRoad tollRoad);
 
     @Delete
@@ -25,8 +29,8 @@ public interface TollRoadDao {
     void addPrice(TollRoadPrice tollRoadPrice);
 
     @Query("SELECT * from road")
-    LiveData<List<TollRoad>> getAllTollRoads();
+    List<TollRoad> getAllTollRoads();
 
-    @Query("SELECT * from price WHERE road_id=:roadId")
-    LiveData<List<TollRoadPrice>> getAllPricesForRoad(long roadId);
+    @Query("SELECT * from price WHERE road_id=:road_id")
+    LiveData<List<TollRoadPrice>> getAllPricesForRoad(long road_id);
 }

@@ -2,33 +2,55 @@ package ru.indychkov.tollroads.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "road")
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+@Entity(tableName = "road", indices = {@Index(value = "id", unique = true)})
 public class TollRoad {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey()
     @ColumnInfo(name = "id")
+    @SerializedName("id")
+    @Expose
     private long id;
 
     @ColumnInfo(name = "name")
+    @SerializedName("name")
+    @Expose
     private String name;
 
     @ColumnInfo(name = "km_start")
+    @SerializedName("km_start")
+    @Expose
     private int km_start;
 
     @ColumnInfo(name = "km_end")
+    @SerializedName("km_end")
+    @Expose
     private int km_end;
 
     @ColumnInfo(name = "section_order")
+    @SerializedName("section_order")
+    @Expose
     private int section_order;
 
+
     @ColumnInfo(name = "name_part")
+    @SerializedName("name_part")
+    @Expose
     private String name_part;
 
     @ColumnInfo(name = "length")
+    @SerializedName("length")
+    @Expose
     private double length;
 
     @ColumnInfo(name = "average_time")
+    @SerializedName("average_time")
+    @Expose
     private double average_time;
 
 
@@ -100,6 +122,21 @@ public class TollRoad {
 
     public void setAverage_time(double average_time) {
         this.average_time = average_time;
+    }
+
+    @Ignore
+    @Override
+    public String toString() {
+        return "TollRoad{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", km_start=" + km_start +
+                ", km_end=" + km_end +
+                ", section_order=" + section_order +
+                ", name_part='" + name_part + '\'' +
+                ", length=" + length +
+                ", average_time=" + average_time +
+                '}';
     }
 
 /*    public double getStart_coordinate_x() {

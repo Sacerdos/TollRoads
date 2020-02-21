@@ -11,7 +11,7 @@ import ru.indychkov.tollroads.model.TollRoad;
 import ru.indychkov.tollroads.model.TollRoadPrice;
 
 
-@Database(entities = {TollRoad.class, TollRoadPrice.class}, version = 1)
+@Database(entities = {TollRoad.class, TollRoadPrice.class}, version = 1, exportSchema = false)
 public abstract class TollRoadsDatabase extends RoomDatabase {
     private static final String TAG = "TollRoadsDatabase";
     public abstract TollRoadDao tollRoadDao();
