@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TollRoads</string>
+    <string name="switch_text">Из Москвы</string>
 </resources>

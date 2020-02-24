@@ -1,6 +1,5 @@
 package ru.indychkov.tollroads.database;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -9,7 +8,6 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import ru.indychkov.tollroads.model.TollRoad;
 import ru.indychkov.tollroads.model.TollRoadName;
 import ru.indychkov.tollroads.model.TollRoadPart;
 import ru.indychkov.tollroads.model.TollRoadPrice;
@@ -47,4 +45,7 @@ public interface TollRoadDao {
 
     @Query("SELECT * from road_name")
     List<TollRoadName> getAllTollRoadName();
+
+    @Query("SELECT * from road_part WHERE main_road_id=:road_id")
+    List<TollRoadPart> getAllTollRoadParts(long road_id);
 }

@@ -55,5 +55,73 @@ public class TollRoadPart {
     @Expose
     private boolean isToMoscow;
 
+    public long getPart_id() {
+        return part_id;
+    }
 
+    public void setPart_id(long part_id) {
+        this.part_id = part_id;
+    }
+
+    public long getMain_road_id() {
+        return main_road_id;
+    }
+
+    public void setMain_road_id(long main_road_id) {
+        this.main_road_id = main_road_id;
+    }
+
+    public int getKm_start() {
+        return km_start;
+    }
+
+    public void setKm_start(int km_start) {
+        this.km_start = km_start;
+    }
+
+    public int getKm_end() {
+        return km_end;
+    }
+
+    public void setKm_end(int km_end) {
+        this.km_end = km_end;
+    }
+
+    public double getSection_order() {
+        return section_order;
+    }
+
+    public void setSection_order(double section_order) {
+        this.section_order = section_order;
+    }
+
+    public boolean isFromMoscow() {
+        return isFromMoscow;
+    }
+
+    public void setFromMoscow(boolean fromMoscow) {
+        isFromMoscow = fromMoscow;
+    }
+
+    public boolean isToMoscow() {
+        return isToMoscow;
+    }
+
+    public void setToMoscow(boolean toMoscow) {
+        isToMoscow = toMoscow;
+    }
+
+    @Ignore
+    @Override
+    public String toString() {
+        return "TollRoadPart{" +
+                "part_id=" + part_id +
+                ", main_road_id=" + main_road_id +
+                ", km_start=" + km_start +
+                ", km_end=" + km_end +
+                ", section_order=" + section_order +
+                ", isFromMoscow=" + isFromMoscow +
+                ", isToMoscow=" + isToMoscow +
+                '}';
+    }
 }

@@ -3,6 +3,7 @@ package ru.indychkov.tollroads.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -29,4 +30,28 @@ public class TollRoadPrice {
     @Expose
     private String part_id;
 
+    public long getPrice_id() {
+        return price_id;
+    }
+
+    public void setPrice_id(long price_id) {
+        this.price_id = price_id;
+    }
+
+    public String getPart_id() {
+        return part_id;
+    }
+
+    public void setPart_id(String part_id) {
+        this.part_id = part_id;
+    }
+
+    @Ignore
+    @Override
+    public String toString() {
+        return "TollRoadPrice{" +
+                "price_id=" + price_id +
+                ", part_id='" + part_id + '\'' +
+                '}';
+    }
 }

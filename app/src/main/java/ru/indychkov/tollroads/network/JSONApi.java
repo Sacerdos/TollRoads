@@ -4,12 +4,15 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
-import ru.indychkov.tollroads.model.TollRoad;
+import ru.indychkov.tollroads.model.TollRoadName;
+import ru.indychkov.tollroads.model.TollRoadPart;
+import ru.indychkov.tollroads.model.TollRoadPrice;
 
 public interface JSONApi {
     @GET("/roads")
-    public Call<List<TollRoad>> getRoads();
+    public Call<List<TollRoadName>> getRoads();
+    @GET("/parts")
+    public Call<List<TollRoadPart>> getParts();
     @GET("/prices")
-    public Call<List<TollRoad>> getPrices();
+    public Call<List<TollRoadPrice>> getPrices();
 }
