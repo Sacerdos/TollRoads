@@ -10,6 +10,8 @@ import androidx.room.Update;
 import java.util.List;
 
 import ru.indychkov.tollroads.model.TollRoad;
+import ru.indychkov.tollroads.model.TollRoadName;
+import ru.indychkov.tollroads.model.TollRoadPart;
 import ru.indychkov.tollroads.model.TollRoadPrice;
 
 import static androidx.room.OnConflictStrategy.REPLACE;
@@ -17,20 +19,32 @@ import static androidx.room.OnConflictStrategy.REPLACE;
 @Dao
 public interface TollRoadDao {
     @Insert(onConflict = REPLACE)
-    void addTollRoad(TollRoad tollRoad);
+    void addTollRoadName(TollRoadName tollRoadName);
 
     @Delete
-    void deleteTollRoad(TollRoad tollRoad);
+    void deleteTollRoadName(TollRoadName tollRoadName);
 
     @Update
-    void updateTollRoad(TollRoad tollRoad);
+    void updateTollRoadName(TollRoadName tollRoadName);
 
-    @Insert
-    void addPrice(TollRoadPrice tollRoadPrice);
+    @Insert(onConflict = REPLACE)
+    void addTollRoadPart(TollRoadPart tollRoadPart);
 
-    @Query("SELECT * from road")
-    List<TollRoad> getAllTollRoads();
+    @Delete
+    void deleteTollRoadPart(TollRoadPart tollRoadPart);
 
-    @Query("SELECT * from price WHERE road_id=:road_id")
-    LiveData<List<TollRoadPrice>> getAllPricesForRoad(long road_id);
+    @Update
+    void updateTollRoadPart(TollRoadPart tollRoadPart);
+
+    @Insert(onConflict = REPLACE)
+    void addTollRoadPrice(TollRoadPrice tollRoadPrice);
+
+    @Delete
+    void deleteTollRoadName(TollRoadPrice tollRoadPrice);
+
+    @Update
+    void updateTollRoadName(TollRoadPrice tollRoadPrice);
+
+    @Query("SELECT * from road_name")
+    List<TollRoadName> getAllTollRoadName();
 }

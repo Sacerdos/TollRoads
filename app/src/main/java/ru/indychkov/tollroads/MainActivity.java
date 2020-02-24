@@ -23,32 +23,34 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         TextView textView = findViewById(R.id.textview);
         db = TollRoadsDatabase.getInstance(getApplicationContext());
-
-        NetworkService.getInstance()
-                .getJSONApi()
-                .getRoads()
-                .enqueue(new Callback<List<TollRoad>>() {
-                    @Override
-                    public void onResponse(Call<List<TollRoad>> call, Response<List<TollRoad>> response) {
-                        for (TollRoad road :
-                                response.body()) {
-                            textView.append(road.toString());
-                            Executor.getInstance().threadDB().execute(() -> db.tollRoadDao().addTollRoad(road));
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<TollRoad>> call, Throwable t) {
-
-                    }
-                });
-        /*Executor.getInstance().threadDB().execute(new Runnable() {
+       /* Executor.getInstance().network().execute(new Runnable() {
             @Override
             public void run() {
+                NetworkService.getInstance()
+                        .getJSONApi()
+                        .getRoads()
+                        .enqueue(new Callback<List<TollRoad>>() {
+                            @Override
+                            public void onResponse(Call<List<TollRoad>> call, Response<List<TollRoad>> response) {
+                                for (TollRoad road :
+                                        response.body()) {
+                                    textView.append(road.toString());
+                                    Executor.getInstance().threadDB().execute(() -> db.tollRoadDao().addTollRoad(road));
 
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<TollRoad>> call, Throwable t) {
+
+                            }
+                        });
+            }
+        });*/
+                /*Executor.getInstance().threadDB().execute(new Runnable() {
+            @Override
+            public void run() {
                 List<TollRoad> data = db.tollRoadDao().getAllTollRoads();
-                System.out.println("sfassafasfasfasfa");
                 for (TollRoad a :
                         data) {
                     a.toString();

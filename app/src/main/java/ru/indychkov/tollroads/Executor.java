@@ -17,7 +17,7 @@ public class Executor {
         if (sInstance == null) {
             synchronized (LOCK) {
                 sInstance = new Executor(Executors.newSingleThreadExecutor(),
-                        Executors.newFixedThreadPool(3));
+                        Executors.newSingleThreadExecutor());
             }
         }
         return sInstance;

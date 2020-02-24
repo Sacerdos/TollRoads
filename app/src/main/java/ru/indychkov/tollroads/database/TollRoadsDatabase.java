@@ -17,7 +17,7 @@ public abstract class TollRoadsDatabase extends RoomDatabase {
     public abstract TollRoadDao tollRoadDao();
     private static final Object LOCK = new Object();
     private static volatile TollRoadsDatabase sInstance;
-    private static final String DATABASE_NAME = "tollroad_db";
+    private static final String DATABASE_NAME = "tollroad.db";
 
     public static TollRoadsDatabase getInstance(Context context) {
         if (sInstance == null) {

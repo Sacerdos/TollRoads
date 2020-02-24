@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkService {
     private static NetworkService sInstance;
-    private static final String BASE_URL = "https://zxcvbnm.mockit.io";
+    private static final String BASE_URL = "https://dychkov.mockit.io";
     private Retrofit retrofit;
     public static NetworkService getInstance() {
         if (sInstance == null) {
@@ -19,7 +19,7 @@ public class NetworkService {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
-    public JSONPlaceHolderApi getJSONApi() {
-        return retrofit.create(JSONPlaceHolderApi.class);
+    public JSONApi getJSONApi() {
+        return retrofit.create(JSONApi.class);
     }
 }

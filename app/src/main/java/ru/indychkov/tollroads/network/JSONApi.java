@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import ru.indychkov.tollroads.model.TollRoad;
 
-public interface JSONPlaceHolderApi {
+public interface JSONApi {
     @GET("/roads")
     public Call<List<TollRoad>> getRoads();
     @GET("/prices")
