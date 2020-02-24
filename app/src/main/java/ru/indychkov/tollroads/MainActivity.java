@@ -19,6 +19,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ru.indychkov.tollroads.database.TollRoadsDatabase;
 import ru.indychkov.tollroads.model.TollRoadName;
@@ -31,17 +33,21 @@ public class MainActivity extends Activity {
     private Spinner roadToSpinner;
     private Button calculateButton;
     private Switch isFromMoscow;
+    public static boolean isFinish=false;
     private int positionRoad = 0;
     private int positionPartFrom = 0;
     private int positionPartTo = 0;
     private TextView answerTextView;
-
+    Timer timer;
+    MyTimerTask timerTask;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        timer = new Timer();
+        timerTask = new MyTimerTask();
         db = TollRoadsDatabase.getInstance(getApplicationContext());
-
+        timer.schedule(timerTask, 1000, 1000);
         roadNameSpinner = findViewById(R.id.spinner_road_name);
         roadFromSpinner = findViewById(R.id.spinner_road_from);
         roadToSpinner = findViewById(R.id.spinner_road_to);
@@ -99,7 +105,7 @@ public class MainActivity extends Activity {
         });
     }
 
-    private void initFromListener() {
+    public void initFromListener() {
         new InitRoadFrom(this, isFromMoscow.isChecked(), positionRoad).execute();
     }
 
@@ -159,15 +165,18 @@ public class MainActivity extends Activity {
             System.out.println("Заполняю второй спиннер");
             List<TollRoadPart> allTollRoadPart = db.tollRoadDao().getAllTollRoadPartsFromMoscow(roadId);
             ArrayList initData = new ArrayList<String>();
+
             for (TollRoadPart element :
                     allTollRoadPart) {
                 initData.add((isFromMoscow ? element.getKm_start() : element.getKm_end()) + " km");
-                System.out.println("Заполняю второй спиннер: " + element.toString());
             }
             ArrayAdapter adapter = new ArrayAdapter<TollRoadPart>(applicationContextTask,
                     android.R.layout.simple_list_item_1,
                     initData);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            if(adapter!=null){
+                System.out.println("lfjmblsk");
+                isFinish=true;
+            }
             return adapter;
         }
 
@@ -239,10 +248,10 @@ public class MainActivity extends Activity {
                 positionEnd = positionPartFrom;
             }
             List<TollRoadPart> allTollRoadPart = db.tollRoadDao().getFinalPath(positionRoad, positionStart, positionEnd);
-            Integer finalPath=0;
+            Integer finalPath = 0;
             for (TollRoadPart element :
                     allTollRoadPart) {
-                finalPath+=(element.getKm_end()-element.getKm_start());
+                finalPath += (element.getKm_end() - element.getKm_start());
             }
             return finalPath;
         }
@@ -250,7 +259,39 @@ public class MainActivity extends Activity {
         @Override
         protected void onPostExecute(Integer finalPath) {
             super.onPostExecute(finalPath);
-            answerTextView.setText(finalPath+"km");
+            answerTextView.setText(finalPath + "km");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        retrieveTasks();
+    }
+
+
+    private void retrieveTasks() {
+        Executor.getInstance().threadDB().execute(new Runnable() {
+            @Override
+            public void run() {
+                new InitRoadName(getApplicationContext()).execute();
+            }
+        });
+    }
+    private class MyTimerTask extends TimerTask {
+
+        @Override
+        public void run() {
+
+            if(isFinish){
+                timer.cancel();
+            }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    retrieveTasks();
+                }
+            });
         }
     }
 }

@@ -16,6 +16,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Response;
 import ru.indychkov.tollroads.Executor;
+import ru.indychkov.tollroads.MainActivity;
 import ru.indychkov.tollroads.model.TollRoadName;
 import ru.indychkov.tollroads.model.TollRoadPart;
 import ru.indychkov.tollroads.model.TollRoadPrice;
@@ -82,10 +83,7 @@ public abstract class TollRoadsDatabase extends RoomDatabase {
 
                                     }
                                 });
-
-
                     }
-
                 });
                 /*Executor.getInstance().network().execute(() -> NetworkService.getInstance()
                         .getJSONApi()

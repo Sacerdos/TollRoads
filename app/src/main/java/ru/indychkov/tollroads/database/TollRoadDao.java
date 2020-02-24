@@ -1,5 +1,6 @@
 package ru.indychkov.tollroads.database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -45,6 +46,9 @@ public interface TollRoadDao {
 
     @Query("SELECT * from road_name")
     List<TollRoadName> getAllTollRoadName();
+
+    @Query("SELECT * from road_part")
+    LiveData<List<TollRoadPart>> getAllParts();
 
     @Query("SELECT * from road_part WHERE main_road_id=:road_id")
     List<TollRoadPart> getAllTollRoadPartsFromMoscow(long road_id);
