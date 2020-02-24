@@ -122,13 +122,13 @@ public class MainActivity extends Activity {
 
         @Override
         protected SpinnerAdapter doInBackground(Void... voids) {
-            System.out.println("Заполняю первый спиннер");
+
             List<TollRoadName> allTollRoadName = db.tollRoadDao().getAllTollRoadName();
             ArrayList initData = new ArrayList();
             for (TollRoadName element :
                     allTollRoadName) {
                 initData.add(element.getMain_name());
-                System.out.println("Заполняю первый спиннер " + element.toString());
+
             }
             SpinnerAdapter roadNameSpinnerAdapter = new ArrayAdapter<TollRoadName>(applicationContextTask,
                     android.R.layout.simple_list_item_1,
@@ -141,7 +141,7 @@ public class MainActivity extends Activity {
         protected void onPostExecute(SpinnerAdapter spinnerAdapter) {
             super.onPostExecute(spinnerAdapter);
             roadNameSpinner.setAdapter(spinnerAdapter);
-            System.out.println("Заполняю второй спиннер исходя из Имени дороги");
+
             new InitRoadFrom(applicationContextTask, isFromMoscow.isChecked(), positionRoad);
         }
     }
@@ -162,7 +162,7 @@ public class MainActivity extends Activity {
 
         @Override
         protected SpinnerAdapter doInBackground(Void... voids) {
-            System.out.println("Заполняю второй спиннер");
+
             List<TollRoadPart> allTollRoadPart = db.tollRoadDao().getAllTollRoadPartsFromMoscow(roadId);
             ArrayList initData = new ArrayList<String>();
 
@@ -174,7 +174,7 @@ public class MainActivity extends Activity {
                     android.R.layout.simple_list_item_1,
                     initData);
             if(adapter!=null){
-                System.out.println("lfjmblsk");
+
                 isFinish=true;
             }
             return adapter;

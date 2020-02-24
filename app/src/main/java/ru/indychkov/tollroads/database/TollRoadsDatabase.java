@@ -35,7 +35,6 @@ public abstract class TollRoadsDatabase extends RoomDatabase {
     public static TollRoadsDatabase getInstance(Context context) {
         if (sInstance == null) {
             synchronized (LOCK) {
-                System.out.println("asdsadasdsadsad");
                 sInstance = Room.databaseBuilder(context.getApplicationContext(),
                         TollRoadsDatabase.class, DATABASE_NAME)
                         .build();
