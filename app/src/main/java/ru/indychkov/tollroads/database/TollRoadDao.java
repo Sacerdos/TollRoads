@@ -47,5 +47,14 @@ public interface TollRoadDao {
     List<TollRoadName> getAllTollRoadName();
 
     @Query("SELECT * from road_part WHERE main_road_id=:road_id")
-    List<TollRoadPart> getAllTollRoadParts(long road_id);
+    List<TollRoadPart> getAllTollRoadPartsFromMoscow(long road_id);
+
+    @Query("SELECT * from road_part WHERE main_road_id=:road_id AND section_order>=:startPosition")
+    List<TollRoadPart> getToTollRoadPartsFromMoscow(long road_id, double startPosition);
+
+    @Query("SELECT * from road_part WHERE main_road_id=:road_id AND section_order<=:startPosition")
+    List<TollRoadPart> getToTollRoadPartsToMoscow(long road_id, double startPosition);
+
+    @Query("SELECT * from road_part WHERE main_road_id=:road_id AND section_order>=:startPosition AND section_order<=:endPosition")
+    List<TollRoadPart> getFinalPath(long road_id, double startPosition, double endPosition);
 }

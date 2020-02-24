@@ -30,6 +30,11 @@ public class TollRoadPart {
     @Expose
     private long main_road_id;
 
+    @ColumnInfo(name = "part_name")
+    @SerializedName("part_name")
+    @Expose
+    private String part_name;
+
     @ColumnInfo(name = "km_start")
     @SerializedName("km_start")
     @Expose
@@ -45,7 +50,7 @@ public class TollRoadPart {
     @Expose
     private double section_order;
 
-    @ColumnInfo(name = "isFromMoscow")
+/*    @ColumnInfo(name = "isFromMoscow")
     @SerializedName("isFromMoscow")
     @Expose
     private boolean isFromMoscow;
@@ -53,7 +58,7 @@ public class TollRoadPart {
     @ColumnInfo(name = "isToMoscow")
     @SerializedName("isToMoscow")
     @Expose
-    private boolean isToMoscow;
+    private boolean isToMoscow;*/
 
     public long getPart_id() {
         return part_id;
@@ -69,6 +74,14 @@ public class TollRoadPart {
 
     public void setMain_road_id(long main_road_id) {
         this.main_road_id = main_road_id;
+    }
+
+    public String getPart_name() {
+        return part_name;
+    }
+
+    public void setPart_name(String part_name) {
+        this.part_name = part_name;
     }
 
     public int getKm_start() {
@@ -95,7 +108,7 @@ public class TollRoadPart {
         this.section_order = section_order;
     }
 
-    public boolean isFromMoscow() {
+/*    public boolean isFromMoscow() {
         return isFromMoscow;
     }
 
@@ -109,7 +122,7 @@ public class TollRoadPart {
 
     public void setToMoscow(boolean toMoscow) {
         isToMoscow = toMoscow;
-    }
+    }*/
 
     @Ignore
     @Override
@@ -120,8 +133,8 @@ public class TollRoadPart {
                 ", km_start=" + km_start +
                 ", km_end=" + km_end +
                 ", section_order=" + section_order +
-                ", isFromMoscow=" + isFromMoscow +
-                ", isToMoscow=" + isToMoscow +
+/*                ", isFromMoscow=" + isFromMoscow +
+                ", isToMoscow=" + isToMoscow +*/
                 '}';
     }
 }
